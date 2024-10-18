@@ -1,13 +1,33 @@
 import { Image, StyleSheet, Platform, View, Text } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { categoryInitial } from '@/data/index'
+import { useState, useEffect } from 'react';
+import CategoryList from '@/components/Category/CategoryList';
 
 export default function HomeScreen() {
-  return (<View  className="w-10 h-10 bg-blue-500"><Text>test</Text></View>
-    
+  const [categories, setCategories] = useState(categoryInitial);
+
+  const onChangeCategories = (categoryList)=>{
+    setCategories(categoryList)
+    console.log(categories)
+  }
+  return (
+
+    <View className="w-100 h-100 ">
+      <h1>My Expensive</h1>
+
+      <View className='flex flex-row  justify-center items-center  space-x-2'>
+        <View className='grow basis-1/3 min-w-300'>
+            <h2>Expensive Edit</h2>
+        </View>
+        <View className='grow basis-1/3 min-w-300'>
+            <h2>List Expensive</h2>
+        </View>
+        <View className='grow basis-1/3 min-w-300'>
+          <CategoryList categories={categories} setCategories={onChangeCategories} />
+        </View>
+      </View>
+    </View>
+
   );
 }
 
